@@ -19,6 +19,13 @@
     $stmtcr->execute();
     $stmtcr->close();
 
-    $stmt = $conn->prepare('INSERT INTO users (Nombre, Gmail, Password) VALUES ("admin", "test@gmail.com", 1234)');
-    $stmt->execute();
+    $stmtcr = $conn->prepare('INSERT INTO users (Nombre, Gmail, Password) VALUES ("admin", "test@gmail.com", 1234)');
+    $stmtcr->execute();
+    $stmtcr->close();
+
+    $stmtcr = $conn->prepare("CREATE TABLE IF NOT EXISTS games (Título varchar(255), Descripción varchar(255), Compañia varchar(255), Caratula BLOB, año date)");
+    $stmtcr->execute();
+    $stmtcr->close();
+
+    echo "DB creada con exito"
 ?>

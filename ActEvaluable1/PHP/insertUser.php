@@ -3,8 +3,7 @@
     $_SESSION["user"] = null;
     $_SESSION["gmail"] = null;
     $_SESSION["passwd"] = null;
-    $_SESSION["error"] = null;
-    $_SESSION["exito"] = null;
+
 
     if(isset($_POST["user"]) && $_POST["user"]!=null){
         $_SESSION["user"] = $_POST["user"];
@@ -57,6 +56,6 @@
         $stmtcr->execute();
         $stmtcr->close();  
         $_SESSION["exito"] = "Cuenta creada con exito";
-        header("Location: registerUser.php");                    
+        header("Location: ../index.php");                    
     }
 ?>

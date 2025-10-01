@@ -5,18 +5,34 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>?</title>
+        <title>Actividad 1</title>
+        <link rel="stylesheet" href="CSS/mainStyle.CSS">
     </head>
     <body>
-        <h1>Actividad Evaluable 1</h1>
+        <div class="session">
+            <button onclick="register()">Registrar usuario</button>
+            <button onclick="login()">Iniciar sesion</button>
+        </div>
+        <br>
+        <div>
+            <button onclick="games()">Registrar juegos</button>
+            <button onclick="seeGames()">Ver juegos registrados</button>
+        </div>
 
-        <form action="comprobante.php" method="post">
-            <input name="email" type="email" placeholder="Introduzca su Gmail">
-            <br><br>
-            <input name="passwd" type="password" placeholder="Introduzca su contraseña">
-            <br><br>
-            <button type="submit">Iniciar sesion</button>
-        </form>
+        <script>
+            function register(){
+                window.location.href = "PHP/registerUser.php"
+            }
+            function login(){
+                window.location.href = "PHP/loginUser.php"                
+            }
+            function games(){
+                window.location.href = "PHP/gamesMain.php"                
+            }
+            function seeGames(){
+                window.location.href = "PHP/imagesTest.php"                
+            }
+        </script>
 
         <?php
             if(isset($_SESSION["error"]) && $_SESSION["error"] != "") {
@@ -24,9 +40,10 @@
                 $_SESSION["error"] = "";
             }
             if(isset( $_SESSION["exito"]) && $_SESSION["exito"] != "") {
-                echo "Exito: " . $_SESSION["exito"];
+                echo "<br>Exito: " . $_SESSION["exito"];
+                echo "<br>Esta usted iniciado como: ".$_SESSION["user"];
                 $_SESSION["exito"] = "";
             }
-        ?>        
+        ?>           
     </body>
 </html>

@@ -11,16 +11,15 @@
         <title>Creacion de usuario</title>
     </head>
     <body>
-        <h1>Actividad Evaluable 1</h1>
+        <h1>Inicio sesion</h1>
 
-        <form action="insertUser.php" method="post">
-            <input name="user" type="text" placeholder="Introduzca su usuario">
-            <br><br>            
+        <form action="loggerUser.php" method="post">         
             <input name="gmail" placeholder="Introduzca su Gmail">
             <br><br>
             <input name="passwd" type="password" placeholder="Introduzca su contraseña">
             <br><br>
-            <button type="submit">Registrar usuario</button>
+            <input name="passwd2" type="password" placeholder="Introduzca su contraseña otra vez">
+            <button type="submit">Iniciar sesion</button>
         </form>
 
         <?php
