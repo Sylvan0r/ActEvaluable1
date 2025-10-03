@@ -2,14 +2,20 @@
     session_start();
     include "../connection.php";
 
-    $query = "SELECT * FROM games";
-    $result = mysqli_query($conn, $query);
-
-    if(mysqli_num_rows( $result ) > 0) {
-        while( $row = mysqli_fetch_assoc($result) ) {
-            ?>
-                <img src="<?php echo $row['Caratula']; ?>" height="200px" width="200px" />
-            <?php
-        }
+    $result = $conn->query("SELECT Caratula FROM games");
+    if($result->num_rows > 0){
+        $row = $result->fetch_assoc();
+        $imageData = $row["Caratula"];
+        
+    }else{
+        echo 'No image uploaded yet.';
+    }  
+    
+    if($result->num_rows > 0){ 
+        while($row = $result->fetch_assoc()){
+            printf('<img src="data:image/jpg;charset=utf8;base64,%s" />', base64_encode($row['Caratula']));
+        } 
+    }else{ 
+        echo 'no va';
     }
 ?>
