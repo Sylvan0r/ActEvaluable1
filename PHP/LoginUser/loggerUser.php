@@ -7,13 +7,9 @@
     comprobante();
 
     function comprobante(){
-        $servername = "localhost";
-        $username = "root";
-        $password = "";
-        $dbname = "actev1";
-        try{
-            $conn = new mysqli($servername, $username, $password, $dbname);   
-            
+        include "../connection.php";
+
+        try{            
             $email = $_POST["gmail"];
             $password = $_POST["passwd"];
 
@@ -29,7 +25,7 @@
                 if($_POST["passwd"] == $array["Password"] && $_POST["passwd2"] == $array["Password"]){
                     $_SESSION["exito"] = "funciona";
                     $_SESSION["user"] = $array["Nombre"];
-                    header("Location: ../index.php");
+                    header("Location: ../../index.php");
                 }else{
                     $_SESSION["error"] = "Gmail o contraseña ingresados incorrectos";
                     header("Location: loginUser.php");                    

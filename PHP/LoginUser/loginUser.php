@@ -19,6 +19,7 @@
             <input name="passwd" type="password" placeholder="Introduzca su contraseña">
             <br><br>
             <input name="passwd2" type="password" placeholder="Introduzca su contraseña otra vez">
+            <br><br>
             <button type="submit">Iniciar sesion</button>
         </form>
 

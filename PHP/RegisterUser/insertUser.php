@@ -40,22 +40,13 @@
 
 
     function insert(){
-        $servername = "localhost";
-        $username = "root";
-        $password = "";
-        $dbname = "actev1";
-        
-        $conn = new mysqli($servername, $username, $password, $dbname);
+        include "../connection.php";
 
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
-        }
+        $stmt = $conn->prepare("INSERT INTO users(Nombre,Gmail,Password) VALUES (?,?,?)");
+        $stmt ->bind_param("sss", $_SESSION["user"], $_SESSION["gmail"], $_SESSION["passwd"]) ;
+        $stmt->execute();
 
-        $stmtcr = $conn->prepare("INSERT INTO users(Nombre,Gmail,Password) VALUES (?,?,?)");
-        $stmtcr->bind_param("sss", $_SESSION["user"], $_SESSION["gmail"], $_SESSION["passwd"]);        
-        $stmtcr->execute();
-        $stmtcr->close();  
         $_SESSION["exito"] = "Cuenta creada con exito";
-        header("Location: ../index.php");                    
+        header("Location: ../../index.php");                    
     }
 ?>

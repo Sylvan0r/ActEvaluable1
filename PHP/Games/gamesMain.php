@@ -1,8 +1,8 @@
 <?php
     session_start();
     if($_SESSION["user"] == null){
-        header("Location: loginUser.php");
         $_SESSION["error"] = "No se ha iniciado sesion";
+        header("Location: loginUser.php");
     }
 ?>
 
