@@ -17,8 +17,8 @@
             $defaultImagePath = '../../IMG/default-placeholder.png'; 
             $imgContent = file_get_contents($defaultImagePath);
         }
-        $stmt = $conn->prepare("INSERT INTO games(Título, Descripción, Compañia, Caratula, año) VALUES (?,?,?,?,?)");            
-        $stmt->bind_param("sssss", $_POST["name"], $_POST["desc"], $_POST["comp"], $imgContent, $_POST["date"]);
+        $stmt = $conn->prepare("INSERT INTO games(Título, Descripción, Compañia, Caratula, año, userID) VALUES (?,?,?,?,?,?)");            
+        $stmt->bind_param("ssssss", $_POST["name"], $_POST["desc"], $_POST["comp"], $imgContent, $_POST["date"], $_SESSION["gmail"]);
         $stmt->execute();
         $_SESSION["exito"] = "Juego creado exitosamente";
         header("Location: ../../index.php");              

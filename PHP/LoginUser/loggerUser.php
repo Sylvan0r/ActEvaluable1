@@ -25,6 +25,7 @@
                 if($_POST["passwd"] == $array["Password"] && $_POST["passwd2"] == $array["Password"]){
                     $_SESSION["exito"] = "funciona";
                     $_SESSION["user"] = $array["Nombre"];
+                    $_SESSION["gmail"] = $array["Gmail"];
                     header("Location: ../../index.php");
                 }else{
                     $_SESSION["error"] = "Gmail o contraseña ingresados incorrectos";

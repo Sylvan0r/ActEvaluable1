@@ -15,7 +15,11 @@
     $stmtcr->close();
     
     $conn = new mysqli($servername, $username, $password, $dbname);
-    $stmtcr = $conn->prepare("CREATE TABLE IF NOT EXISTS users(Nombre varchar(255), Gmail varchar(255), Password varchar(255), PRIMARY KEY(Gmail))");
+    $stmtcr = $conn->prepare("CREATE TABLE IF NOT EXISTS users(
+                                        Nombre varchar(255), 
+                                        Gmail varchar(255), 
+                                        Password varchar(255), 
+                                        PRIMARY KEY(Gmail))");
     $stmtcr->execute();
     $stmtcr->close();
 
@@ -23,7 +27,14 @@
     $stmtcr->execute();
     $stmtcr->close();
 
-    $stmtcr = $conn->prepare("CREATE TABLE IF NOT EXISTS games (ID INT NOT NULL AUTO_INCREMENT, Título varchar(255), Descripción varchar(255), Compañia varchar(255), Caratula BLOB, año date, userID varchar(255), PRIMARY KEY(ID), FOREIGN KEY (userID) REFERENCES users(Gmail))");
+    $stmtcr = $conn->prepare("CREATE TABLE IF NOT EXISTS games (ID INT NOT NULL AUTO_INCREMENT, 
+                                                                        Título varchar(255), 
+                                                                        Descripción varchar(255), 
+                                                                        Compañia varchar(255), 
+                                                                        Caratula BLOB, año date, 
+                                                                        userID varchar(255), 
+                                                                        PRIMARY KEY(ID), 
+                                                                        FOREIGN KEY (userID) REFERENCES users(Gmail))");
     $stmtcr->execute();
     $stmtcr->close();    
 
