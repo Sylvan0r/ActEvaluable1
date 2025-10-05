@@ -36,32 +36,30 @@
     function validator() {
         include "../connection.php";
 
-        // Validación individual con mensajes personalizados
         if (empty($_POST["name"])) {
             $_SESSION["error"] = "El nombre del juego es obligatorio";
-            header("Location: gamesMain.php");
+            header("Location: registerGame.php");
             exit();
         }
 
         if (empty($_POST["desc"])) {
             $_SESSION["error"] = "La descripción del juego es obligatoria";
-            header("Location: gamesMain.php");
+            header("Location: registerGame.php");
             exit();
         }
 
         if (empty($_POST["comp"])) {
             $_SESSION["error"] = "La compañía del juego es obligatoria";
-            header("Location: gamesMain.php");
+            header("Location: registerGame.php");
             exit();
         }
 
         if (empty($_POST["date"])) {
             $_SESSION["error"] = "La fecha de salida del juego es obligatoria";
-            header("Location: gamesMain.php");
+            header("Location: registerGame.php");
             exit();
         }
 
-        // Validar duplicado
         $check = $conn->prepare("SELECT ID FROM games WHERE Título = ? AND Compañia = ? AND año = ?");
         $check->bind_param("sss", $_POST["name"], $_POST["comp"], $_POST["date"]);
         $check->execute();
@@ -69,7 +67,7 @@
 
         if ($result->num_rows > 0) {
             $_SESSION["error"] = "Ya existe ese juego en la base de datos.";
-            header("Location: gamesMain.php");
+            header("Location: registerGame.php");
             exit();
         }
 

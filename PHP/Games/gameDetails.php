@@ -1,43 +1,51 @@
 <?php
-session_start();
-include "../connection.php";
+    session_start();
+    include "../connection.php";
 
-if (isset($_GET['id'])) {
-    $id = intval($_GET['id']);
+    if (isset($_GET['id'])) {
+        $id = intval($_GET['id']);
 
-    $stmt = $conn->prepare("SELECT Título, Año, Caratula, Compañia, userID FROM games WHERE ID = ?");
-    $stmt->bind_param("s", $id);
-    $stmt->execute();
+        $stmt = $conn->prepare("SELECT Título, Descripción, Año, Caratula, Compañia, userID FROM games WHERE ID = ?");
+        $stmt->bind_param("s", $id);
+        $stmt->execute();
 
-    $result = $stmt->get_result();
+        $result = $stmt->get_result();
 
-    if ($result->num_rows === 1) {
-        $row = $result->fetch_assoc();
+        if ($result->num_rows === 1) {
+            $row = $result->fetch_assoc();
 
-        echo '<h1>' . htmlspecialchars($row['Título']) . '</h1>';
-        echo '<p><strong>Año:</strong> ' . htmlspecialchars($row['Año']) . '</p>';
-        echo '<p><strong>Compañía:</strong> ' . htmlspecialchars($row['Compañia']) . '</p>';
-        echo '<img width="400" src="data:image/jpg;base64,' . base64_encode($row['Caratula']) . '" />';
+            echo '<div class="game-details">';
+            echo '<h1 class="game-title">' . htmlspecialchars($row['Título']) . '</h1>';
+            echo '<p class="game-desc"><strong>Descripción:</strong> ' . htmlspecialchars($row['Descripción']) . '</p>';
+            echo '<p class="game-year"><strong>Año:</strong> ' . htmlspecialchars($row['Año']) . '</p>';
+            echo '<p class="game-company"><strong>Compañía:</strong> ' . htmlspecialchars($row['Compañia']) . '</p>';
+            echo '<div class="game-cover">';
+            echo '<img src="data:image/jpg;base64,' . base64_encode($row['Caratula']) . '" alt="Carátula del juego">';
+            echo '</div>';
 
-        if ($row['userID'] === $_SESSION["gmail"]) {
-            echo '<br><br>';
-            
-            echo '<a href="editGame.php?id=' . urlencode($_GET['id']) . '" style="margin-right: 10px;">
-                    <button>Editar</button>
-                </a>';
+            if ($row['userID'] === $_SESSION["gmail"]) {
+                echo '<div class="game-actions">';
+                echo '<a href="editGame.php?id=' . urlencode($_GET['id']) . '" class="btn edit">Editar</a>';
+                echo '<a href="deleteGame.php?id=' . urlencode($_GET['id']) . '" class="btn delete" onclick="return confirm(\'¿Estás seguro de que quieres borrar este juego?\');">Borrar</a>';
+                echo '</div>';
+            }
 
-            echo '<a href="deleteGame.php?id=' . urlencode($_GET['id']) . '" onclick="return confirm(\'¿Estás seguro de que quieres borrar este juego?\');">
-                    <button style="background-color: red; color: white;">Borrar</button>
-                </a>';
+            echo '<div class="back-button">';
+            echo '<a href="showGames.php" class="btn">Volver</a>';
+            echo '</div>';
+            echo '</div>'; 
+        } else {
+            echo "<p class='error'>Juego no encontrado.</p>";
         }
-
-        echo '<br><br><a href="showGames.php">← Volver</a>';
+        $stmt->close();
     } else {
-        echo "Juego no encontrado.";
+        echo "ID inválido.";
     }
-
-    $stmt->close();
-} else {
-    echo "ID inválido.";
-}
 ?>
+
+<html>
+    <head>
+        <title>Detalles de <?php echo htmlspecialchars($row['Título'])?></title>
+        <link rel="stylesheet" href="../../CSS/mainStyle.css">
+    </head>
+</html>

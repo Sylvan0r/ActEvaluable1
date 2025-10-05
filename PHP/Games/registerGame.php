@@ -9,7 +9,8 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Juegos</title>
+        <title>Registro de juegos</title>
+        <link rel="stylesheet" href="../../CSS/mainStyle.css">
     </head>
     <body>
         <h1>Registro de juego</h1>
@@ -21,16 +22,19 @@
             <br><br>
             <input name="comp" placeholder="Compañia creadora">
             <br><br>            
-            <input name="image" type="file" accept="image/*" placeholder="Introduzca su caratula">
+            <input class="img" name="image" type="file" accept="image/*" placeholder="Introduzca su caratula">
             <br><br>
             <input name="date" type="date" placeholder="Introduzca su fecha de salida">
             <br><br>                        
             <button type="submit">Registrar juego</button>
         </form>
+        <br>
+        <a href="../../index.php"><button>Volver</button></a>
 
         <?php
             if(isset($_SESSION["error"]) && $_SESSION["error"] != "") {
-                echo "Error: " . $_SESSION["error"];
+                echo "<br>";
+                echo "<p class='error'>Error: " . $_SESSION["error"] . "</p>";
                 $_SESSION["error"] = "";
             }
             if(isset( $_SESSION["exito"]) && $_SESSION["exito"] != "") {

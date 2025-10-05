@@ -7,9 +7,12 @@
 
 <!DOCTYPE html>
 <html>
+
     <head>
-        <title>Creacion de usuario</title>
+        <title>Inicio de sesión</title>
+        <link rel="stylesheet" href="../../CSS/mainStyle.css">
     </head>
+
     <body>
         <h1>Inicio sesion</h1>
 
@@ -20,16 +23,20 @@
             <br><br>
             <input name="passwd2" type="password" placeholder="Introduzca su contraseña otra vez">
             <br><br>
-            <button type="submit">Iniciar sesion</button>
+            <button type="submit">Iniciar sesión</button>
         </form>
+        <br>
+        <a href="../../index.php"><button>Volver</button></a>
 
         <?php
             if(isset($_SESSION["error"]) && $_SESSION["error"] != "") {
-                echo "Error: " . $_SESSION["error"];
+                echo "<br>";
+                echo "<p class='error'>Error: " . $_SESSION["error"] . "</p>";
                 $_SESSION["error"] = "";
             }
             if(isset( $_SESSION["exito"]) && $_SESSION["exito"] != "") {
-                echo "Exito: " . $_SESSION["exito"];
+                echo "<br>";
+                echo "<p>Exito: " . $_SESSION["exito"] . "</p>";
                 $_SESSION["exito"] = "";
             }
         ?>        

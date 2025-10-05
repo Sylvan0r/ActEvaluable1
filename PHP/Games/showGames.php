@@ -15,19 +15,29 @@
         $result = $conn->query("SELECT ID, Título, Año, Caratula FROM games");
 
         if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                echo '<div style="display: inline-block; margin: 15px; text-align: center;">';
-                echo '<div style="font-weight: bold;">' . htmlspecialchars($row['Título']) . '</div>';
-                echo '<div>' . htmlspecialchars($row['Año']) . '</div>';
-                
-                echo '<a href="gameDetails.php?id=' . urlencode($row['ID']) . '">';
-                echo '<img width="300" height="300" src="data:image/jpg;base64,' . base64_encode($row['Caratula']) . '" />';
-                echo '</a>';
+            echo '<div class="games-container">';
 
+            while ($row = $result->fetch_assoc()) {
+                echo '<div class="game-card">';
+                echo '<div class="name">' . htmlspecialchars($row['Título']) . '</div>';
+                echo '<div class="date">' . htmlspecialchars($row['Año']) . '</div>';
+                echo '<a href="gameDetails.php?id=' . urlencode($row['ID']) . '">';
+                echo '<img width="300" height="300" src="data:image/jpg;base64,' . base64_encode($row['Caratula']) . '" alt="Carátula del juego">';
+                echo '</a>';
                 echo '</div>';
             }
+
+            echo '</div>'; 
+            echo '<div class="back-button"><a href="../../index.php"><button>Volver</button></a></div>';
         } else {
             echo "No hay juegos disponibles.";
         }
     }
 ?>
+
+<html>
+    <head>
+        <title>Biblioteca de juegos</title>
+        <link rel="stylesheet" href="../../CSS/mainStyle.css">
+    </head>
+</html>
