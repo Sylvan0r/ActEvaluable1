@@ -41,6 +41,18 @@
 
     function insert(){
         include "../connection.php";
+        
+        $check = $conn->prepare("SELECT Gmail FROM users WHERE Gmail = ?");
+        $check->bind_param("s", $_SESSION["gmail"]);
+        $check->execute();
+        $result = $check->get_result();
+
+        if ($result->num_rows > 0) {
+            $_SESSION["error"] = "Ya existe una cuenta registrada con ese Gmail.";
+            header("Location: registerUser.php");
+            exit();
+        }
+        $check->close();
 
         $stmt = $conn->prepare("INSERT INTO users(Nombre,Gmail,Password) VALUES (?,?,?)");
         $stmt ->bind_param("sss", $_SESSION["user"], $_SESSION["gmail"], $_SESSION["passwd"]) ;

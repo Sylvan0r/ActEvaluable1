@@ -5,7 +5,6 @@
     if (isset($_GET['id']) && is_numeric($_GET['id'])) {
         $id = intval($_GET['id']);
 
-        // Verificar si el juego pertenece al usuario logueado
         $stmt = $conn->prepare("SELECT userID FROM games WHERE ID = ?");
         $stmt->bind_param("i", $id);
         $stmt->execute();
@@ -13,7 +12,6 @@
 
         if ($row = $result->fetch_assoc()) {
             if ($row['userID'] === $_SESSION['gmail']) {
-                // Usuario autorizado, proceder a borrar
                 $deleteStmt = $conn->prepare("DELETE FROM games WHERE ID = ?");
                 $deleteStmt->bind_param("i", $id);
                 $deleteStmt->execute();

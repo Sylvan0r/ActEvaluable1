@@ -36,7 +36,6 @@ if (isset($_GET['id'])) {
         echo "Juego no encontrado.";
     }
 
-
     $stmt->close();
 } else {
     echo "ID inválido.";

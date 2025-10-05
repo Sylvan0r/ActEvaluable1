@@ -7,7 +7,6 @@ if (!isset($_SESSION['gmail'])) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    // Mostrar el formulario con los datos actuales
     if (isset($_GET['id']) && is_numeric($_GET['id'])) {
         $id = intval($_GET['id']);
 
@@ -55,14 +54,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     }
 
 } elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Procesar el formulario y actualizar
     if (
         isset($_POST['id'], $_POST['titulo'], $_POST['desc'], $_POST['comp'], $_POST['year']) &&
         is_numeric($_POST['id'])
     ) {
         $id = intval($_POST['id']);
 
-        // Verificar propiedad
         $stmt = $conn->prepare("SELECT userID FROM games WHERE ID = ?");
         $stmt->bind_param("i", $id);
         $stmt->execute();
@@ -78,15 +75,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             $comp = $_POST['comp'];
             $year = $_POST['year'];
 
-            // Comprobar si se subió nueva imagen
             if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
                 $image = file_get_contents($_FILES['image']['tmp_name']);
 
-                // Con imagen
                 $update = $conn->prepare("UPDATE games SET Título=?, Descripción=?, Compañia=?, año=?, Caratula=? WHERE ID=?");
                 $update->bind_param("sssssi", $titulo, $desc, $comp, $year, $image, $id);
             } else {
-                // Sin imagen
                 $update = $conn->prepare("UPDATE games SET Título=?, Descripción=?, Compañia=?, año=? WHERE ID=?");
                 $update->bind_param("ssssi", $titulo, $desc, $comp, $year, $id);
             }
