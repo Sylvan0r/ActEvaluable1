@@ -30,7 +30,8 @@
 
     function validarPasswd(){
         if((isset($_POST["passwd"]) && $_POST["passwd"]!=null)){
-            $_SESSION["passwd"] = $_POST["passwd"];
+            $passwdHash = password_hash($_POST["passwd"], PASSWORD_DEFAULT);
+            $_SESSION["passwd"] = $passwdHash;
             insert();
         }else{
             $_SESSION["error"] = "La contraseña es obligatoria";

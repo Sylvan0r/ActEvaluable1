@@ -9,11 +9,8 @@
     function comprobante(){
         include "../connection.php";
 
-        try{            
-            $email = $_POST["gmail"];
-            $password = $_POST["passwd"];
-
-            $stmt = $conn->prepare("SELECT Nombre, Gmail, Password FROM users WHERE Gmail='$email' AND Password='$password'");
+        try{                        
+            $stmt = $conn->prepare("SELECT Nombre, Gmail, Password FROM users WHERE Gmail='$_POST[gmail]'");
             $stmt->execute();
 
             $result = $stmt->get_result();
@@ -22,8 +19,8 @@
                 while($row = mysqli_fetch_assoc( $result )){
                     $array = $row;
                 }
-                if($_POST["passwd"] == $array["Password"] && $_POST["passwd2"] == $array["Password"]){
-                    $_SESSION["exito"] = "funciona";
+                if(password_verify($_POST["passwd"], $array["Password"])){
+                    $_SESSION["exito"] = "Sesión iniciada como ". $array["Nombre"];
                     $_SESSION["user"] = $array["Nombre"];
                     $_SESSION["gmail"] = $array["Gmail"];
                     header("Location: ../../index.php");
