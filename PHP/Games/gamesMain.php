@@ -1,9 +1,9 @@
 <?php
     session_start();
-    if($_SESSION["user"] == null){
-        $_SESSION["error"] = "No se ha iniciado sesion";
-        header("Location: loginUser.php");
-    }
+    if (!isset($_SESSION["user"])){
+        $_SESSION["error"] = "Inicie sesion para ver los juegos";
+        header("Location: ../LoginUser/loginUser.php");
+    }    
 ?>
 
 <!DOCTYPE html>

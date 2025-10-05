@@ -23,11 +23,7 @@
     $stmtcr->execute();
     $stmtcr->close();
 
-    $stmtcr = $conn->prepare("CREATE TABLE IF NOT EXISTS games (Título varchar(255), Descripción varchar(255), Compañia varchar(255), Caratula BLOB, año date, userID varchar(255))");
-    $stmtcr->execute();
-    $stmtcr->close();
-
-    $stmtcr = $conn->prepare("CREATE TABLE IF NOT EXISTS games (Título varchar(255), Descripción varchar(255), Compañia varchar(255), Caratula BLOB, año date, userID varchar(255), PRIMARY KEY(Título), FOREIGN KEY (userID) REFERENCES users(Gmail))");
+    $stmtcr = $conn->prepare("CREATE TABLE IF NOT EXISTS games (ID INT NOT NULL AUTO_INCREMENT, Título varchar(255), Descripción varchar(255), Compañia varchar(255), Caratula BLOB, año date, userID varchar(255), PRIMARY KEY(ID), FOREIGN KEY (userID) REFERENCES users(Gmail))");
     $stmtcr->execute();
     $stmtcr->close();    
 

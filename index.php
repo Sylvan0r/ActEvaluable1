@@ -30,7 +30,7 @@
                 window.location.href = "PHP/Games/gamesMain.php"                
             }
             function seeGames(){
-                window.location.href = "PHP/Games/imagesTest.php"                
+                window.location.href = "PHP/Games/showGames.php"                
             }
         </script>
 
