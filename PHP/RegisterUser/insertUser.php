@@ -1,18 +1,24 @@
+<!-- Quitamos todo lo importante de sesion para que no tengan conflictos a futuro por si entran de otro lado -->
 <?php
     session_start();
     $_SESSION["user"] = null;
     $_SESSION["gmail"] = null;
     $_SESSION["passwd"] = null;
 
+    validarName();
 
-    if(isset($_POST["user"]) && $_POST["user"]!=null){
-        $_SESSION["user"] = $_POST["user"];
-        validarGmail();
-    }else{
-        $_SESSION["error"] = "Usuario invalido";
-        header("Location: registerUser.php");        
+    /* Funcion de comprobación del input del nombre */
+    function validarName(){
+        if(isset($_POST["user"]) && $_POST["user"]!=null){
+            $_SESSION["user"] = $_POST["user"];
+            validarGmail();
+        }else{
+            $_SESSION["error"] = "Usuario invalido";
+            header("Location: registerUser.php");        
+        }
     }
 
+    /* Funcion comprobante de si gmail es valido o esta dentro de la BD */
     function validarGmail(){
         if(isset($_POST["gmail"]) && filter_var($_POST["gmail"], FILTER_VALIDATE_EMAIL)){
             if($_POST["gmail"] != null){
@@ -28,6 +34,7 @@
         }
     }
 
+    /* Comprobante de contraseña (en hash) */
     function validarPasswd(){
         if((isset($_POST["passwd"]) && $_POST["passwd"]!=null)){
             $passwdHash = password_hash($_POST["passwd"], PASSWORD_DEFAULT);
@@ -39,7 +46,7 @@
         }
     }
 
-
+    /* Insercion de usuario en la BD */
     function insert(){
         include "../connection.php";
         
@@ -48,6 +55,7 @@
         $check->execute();
         $result = $check->get_result();
 
+        /* Comprobante de si es que ya existe el Gmail dentro de la BD */
         if ($result->num_rows > 0) {
             $_SESSION["error"] = "Ya existe una cuenta registrada con ese Gmail.";
             header("Location: registerUser.php");
@@ -55,6 +63,7 @@
         }
         $check->close();
 
+        /* Inserción dentro de la BD */
         $stmt = $conn->prepare("INSERT INTO users(Nombre,Gmail,Password) VALUES (?,?,?)");
         $stmt ->bind_param("sss", $_SESSION["user"], $_SESSION["gmail"], $_SESSION["passwd"]) ;
         $stmt->execute();

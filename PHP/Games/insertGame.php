@@ -1,6 +1,6 @@
 <?php
     session_start();
-
+    /* Si no hay nadie como login entonces nos redirige a la pagina */
     if (isset($_SESSION["user"]) && $_SESSION["user"] != "") {
         send();
     } else {
@@ -11,20 +11,34 @@
 
     function send() {
         include "../connection.php";
-        validator(); // Ejecuta validación antes de continuar
+        validator(); 
 
-        // Imagen (opcional)
         if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
             $image = $_FILES["image"]["tmp_name"];
             $imgContent = file_get_contents($image);
+            $imageHash = hash('sha256', $imgContent);
         } else {
             $defaultImagePath = '../../IMG/default-placeholder.png'; 
             $imgContent = file_get_contents($defaultImagePath);
         }
 
-        // Insertar en la base de datos
-        $stmt = $conn->prepare("INSERT INTO games(Título, Descripción, Compañia, Caratula, año, userID) VALUES (?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("ssssss", $_POST["name"], $_POST["desc"], $_POST["comp"], $imgContent, $_POST["date"], $_SESSION["gmail"]);
+        /* Seccion que comprueba que la misma imagen no sea introducida dos veces */
+        $checkImg = $conn->prepare("SELECT ID FROM games WHERE Caratula_hash = ?");
+        $checkImg->bind_param("s", $imageHash);
+        $checkImg->execute();
+        $imgResult = $checkImg->get_result();
+
+        if ($imgResult->num_rows > 0) {
+            $_SESSION["error"] = "Esa imagen ya ha sido utilizada para otro juego.";
+            header("Location: registerGame.php");
+            exit();
+        }
+        
+        $checkImg->close();
+
+        /* Seccion que introduce todo dentro de la BD */
+        $stmt = $conn->prepare("INSERT INTO games(Título, Descripción, Compañia, Caratula, año, userID, Caratula_hash) VALUES (?, ?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("sssssss", $_POST["name"], $_POST["desc"], $_POST["comp"], $imgContent, $_POST["date"], $_SESSION["gmail"], $imageHash);
         $stmt->execute();
         $stmt->close();
 
@@ -33,9 +47,10 @@
         exit();
     }
 
+    /* Comprobante de valores correctos dentro del juego */
     function validator() {
         include "../connection.php";
-
+        /* Seccion que indica que si o si necesitan valores */
         if (empty($_POST["name"])) {
             $_SESSION["error"] = "El nombre del juego es obligatorio";
             header("Location: registerGame.php");
@@ -60,6 +75,7 @@
             exit();
         }
 
+        /* Seccion que impide el meter el mismo juego dos veces */
         $check = $conn->prepare("SELECT ID FROM games WHERE Título = ? AND Compañia = ? AND año = ?");
         $check->bind_param("sss", $_POST["name"], $_POST["comp"], $_POST["date"]);
         $check->execute();

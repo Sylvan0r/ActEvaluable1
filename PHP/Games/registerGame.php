@@ -1,3 +1,4 @@
+<!-- Si no hay nadie como login entonces nos redirige a la pagina -->
 <?php
     session_start();
     if (!isset($_SESSION["user"])){
@@ -14,7 +15,7 @@
     </head>
     <body>
         <h1>Registro de juego</h1>
-
+        <!-- Sección del formulario -->
         <form action="insertGame.php" method="post" enctype="multipart/form-data">
             <input name="name" type="text" placeholder="Nombre del juego">
             <br><br>            
@@ -30,7 +31,8 @@
         </form>
         <br>
         <a href="../../index.php"><button>Volver</button></a>
-
+        
+        <!-- Sección de errores y exitos -->
         <?php
             if(isset($_SESSION["error"]) && $_SESSION["error"] != "") {
                 echo "<br>";

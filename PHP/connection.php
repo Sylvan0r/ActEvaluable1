@@ -1,3 +1,4 @@
+<!-- Seccion de coneccion reutilizable para el servidor -->
 <?php
     $dbHost     = "localhost";  
     $dbUsername = "root";  

@@ -1,10 +1,6 @@
+<!-- Creacion de base de datos rapida con admin incluido para testeo -->
 <?php
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "actev1";
-    
-    $conn = new mysqli($servername, $username, $password);
+    include "connection.php";
 
     if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
@@ -14,7 +10,7 @@
     $stmtcr->execute();
     $stmtcr->close();
     
-    $conn = new mysqli($servername, $username, $password, $dbname);
+    $conn = new mysqli($dbHost, $dbUsername, $dbPassword, $dbName);
     $stmtcr = $conn->prepare("CREATE TABLE IF NOT EXISTS users(
                                         Nombre varchar(255), 
                                         Gmail varchar(255), 
@@ -24,7 +20,7 @@
     $stmtcr->close();
 
     $passwd = password_hash(1234, PASSWORD_DEFAULT);
-    $stmtcr = $conn->prepare("INSERT INTO users (Nombre, Gmail, Password) VALUES ('admin', 'test@gmail.com', '$passwd')");
+    $stmtcr = $conn->prepare("INSERT IGNORE INTO users (Nombre, Gmail, Password) VALUES ('admin', 'test@gmail.com', '$passwd')");
     $stmtcr->execute();
     $stmtcr->close();
 
@@ -32,7 +28,9 @@
                                                                         Título varchar(255), 
                                                                         Descripción varchar(255), 
                                                                         Compañia varchar(255), 
-                                                                        Caratula BLOB, año date, 
+                                                                        Caratula BLOB, 
+                                                                        Caratula_hash varchar(64),
+                                                                        año date, 
                                                                         userID varchar(255), 
                                                                         PRIMARY KEY(ID), 
                                                                         FOREIGN KEY (userID) REFERENCES users(Gmail))");

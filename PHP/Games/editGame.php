@@ -1,9 +1,11 @@
 <?php
     session_start();
     include "../connection.php";
-
+    
+    /* Comprobante de que se tiene una sesion */
     if (!isset($_SESSION['gmail'])) {
-        die("Acceso no autorizado.");
+        $_SESSION["error"] = "Inicie sesion para ver los juegos";
+        header("Location: ../LoginUser/loginUser.php");
     }
 
     if ($_SERVER['REQUEST_METHOD'] === 'GET') {
@@ -20,6 +22,7 @@
                     die("No tienes permiso para editar este juego.");
                 }
                 ?>
+                <!-- HTML encargado de pillar los datos para el update -->
                 <html>
                     <head>
                         <title>Edicion de <?php echo htmlspecialchars($row['Título'])?></title>
@@ -64,24 +67,21 @@
         } else {
             echo "ID inválido.";
         }
-
-    } elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        if (
-            isset($_POST['id'], $_POST['titulo'], $_POST['desc'], $_POST['comp'], $_POST['year']) &&
-            is_numeric($_POST['id'])
-        ) {
-            $id = intval($_POST['id']);
-
+        
+    } elseif ($_SERVER['REQUEST_METHOD'] === 'POST') { /* Mientras el metodo del servidor sea por Post */
+        if (isset($_POST['id'], $_POST['titulo'], $_POST['desc'], $_POST['comp'], $_POST['year']) && is_numeric($_POST['id'])) {
+            $id = $_POST['id'];
             $stmt = $conn->prepare("SELECT userID FROM games WHERE ID = ?");
-            $stmt->bind_param("i", $id);
+            $stmt->bind_param("s", $id);
             $stmt->execute();
             $res = $stmt->get_result();
 
             if ($row = $res->fetch_assoc()) {
+                /* Ultimo comprobante de que la cuenta es la correcta */
                 if ($row['userID'] !== $_SESSION['gmail']) {
                     die("No tienes permiso para editar este juego.");
                 }
-
+                /* Seccion del update del juego */
                 $titulo = $_POST['titulo'];
                 $desc = $_POST['desc'];
                 $comp = $_POST['comp'];

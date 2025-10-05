@@ -4,7 +4,7 @@
 
     if (isset($_GET['id'])) {
         $id = intval($_GET['id']);
-
+        /* Seccion del query del juego al que hacemos click */
         $stmt = $conn->prepare("SELECT Título, Descripción, Año, Caratula, Compañia, userID FROM games WHERE ID = ?");
         $stmt->bind_param("s", $id);
         $stmt->execute();
@@ -13,7 +13,7 @@
 
         if ($result->num_rows === 1) {
             $row = $result->fetch_assoc();
-
+            /* HTML hecho con echo para ver los detalles del juego */
             echo '<div class="game-details">';
             echo '<h1 class="game-title">' . htmlspecialchars($row['Título']) . '</h1>';
             echo '<p class="game-desc"><strong>Descripción:</strong> ' . htmlspecialchars($row['Descripción']) . '</p>';

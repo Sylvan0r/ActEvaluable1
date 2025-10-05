@@ -1,3 +1,4 @@
+<!-- Quitamos todo lo importante de sesion para que no tengan conflictos a futuro por si entran de otro lado -->
 <?php
     session_start();
     $_SESSION["user"] = null;
@@ -7,7 +8,6 @@
 
 <!DOCTYPE html>
 <html>
-
     <head>
         <title>Inicio de sesión</title>
         <link rel="stylesheet" href="../../CSS/mainStyle.css">
@@ -15,7 +15,7 @@
 
     <body>
         <h1>Inicio sesion</h1>
-
+        <!-- Sección del formulario -->
         <form action="loggerUser.php" method="post">         
             <input name="gmail" placeholder="Introduzca su Gmail">
             <br><br>
@@ -28,6 +28,7 @@
         <br>
         <a href="../../index.php"><button>Volver</button></a>
 
+        <!-- Sección de errores y exitos -->        
         <?php
             if(isset($_SESSION["error"]) && $_SESSION["error"] != "") {
                 echo "<br>";

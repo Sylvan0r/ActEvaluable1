@@ -1,3 +1,4 @@
+<!-- Quitamos todo lo importante de sesion para que no tengan conflictos a futuro por si entran de otro lado -->
 <?php
     session_start();
     $_SESSION["user"] = null;
@@ -13,7 +14,7 @@
     </head>
     <body>
         <h1>Actividad Evaluable 1</h1>
-
+        <!-- Sección del formulario -->
         <form action="insertUser.php" method="post">
             <input name="user" type="text" placeholder="Introduzca su usuario">
             <br><br>            
@@ -26,6 +27,7 @@
         <br>
         <a href="../../index.php"><button>Volver</button></a>
 
+        <!-- Sección de errores y exitos -->        
         <?php
             if(isset($_SESSION["error"]) && $_SESSION["error"] != "") {
                 echo "<br>";
