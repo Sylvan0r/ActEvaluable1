@@ -23,7 +23,8 @@
     $stmtcr->execute();
     $stmtcr->close();
 
-    $stmtcr = $conn->prepare('INSERT INTO users (Nombre, Gmail, Password) VALUES ("admin", "test@gmail.com", 1234)');
+    $passwd = password_hash(1234, PASSWORD_DEFAULT);
+    $stmtcr = $conn->prepare("INSERT INTO users (Nombre, Gmail, Password) VALUES ('admin', 'test@gmail.com', '$passwd')");
     $stmtcr->execute();
     $stmtcr->close();
 
