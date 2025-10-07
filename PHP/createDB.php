@@ -1,6 +1,11 @@
 <!-- Creacion de base de datos rapida con admin incluido para testeo -->
 <?php
-    include "connection.php";
+    $dbHost     = "localhost";  
+    $dbUsername = "root";  
+    $dbPassword = "";  
+    $dbName     = "actev1";
+
+    $conn = new mysqli($dbHost, $dbUsername, $dbPassword);
 
     if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
