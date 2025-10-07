@@ -23,8 +23,12 @@
         <!-- Botones de sección de juegos -->
         <div>
             <button onclick="games()">Registrar juegos</button>
-            <button onclick="seeGames()">Ver juegos registrados</button>
         </div>
+
+        <?php
+            include "PHP/Games/showGames.php";
+            showGames();
+        ?>
 
         <!-- Funciones de los botones al ser pulsados -->         
         <script>
@@ -39,9 +43,6 @@
             }                        
             function games(){
                 window.location.href = "PHP/Games/registerGame.php"                
-            }
-            function seeGames(){
-                window.location.href = "PHP/Games/showGames.php"                
             }
         </script>
 

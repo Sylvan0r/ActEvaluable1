@@ -23,15 +23,19 @@
             echo '<img src="data:image/jpg;base64,' . base64_encode($row['Caratula']) . '" alt="Carátula del juego">';
             echo '</div>';
 
-            if ($row['userID'] === $_SESSION["gmail"]) {
-                echo '<div class="game-actions">';
-                echo '<a href="editGame.php?id=' . urlencode($_GET['id']) . '" class="btn edit">Editar</a>';
-                echo '<a href="deleteGame.php?id=' . urlencode($_GET['id']) . '" class="btn delete" onclick="return confirm(\'¿Estás seguro de que quieres borrar este juego?\');">Borrar</a>';
-                echo '</div>';
+            if(!isset($_SESSION["gmail"])){
+                echo "";
+            }else{
+                if ($row['userID'] === $_SESSION["gmail"]) {
+                    echo '<div class="game-actions">';
+                    echo '<a href="editGame.php?id=' . urlencode($_GET['id']) . '" class="btn edit">Editar</a>';
+                    echo '<a href="deleteGame.php?id=' . urlencode($_GET['id']) . '" class="btn delete" onclick="return confirm(\'¿Estás seguro de que quieres borrar este juego?\');">Borrar</a>';
+                    echo '</div>';
+                }
             }
 
             echo '<div class="back-button">';
-            echo '<a href="showGames.php" class="btn">Volver</a>';
+            echo '<a href="../../index.php" class="btn">Volver</a>';
             echo '</div>';
             echo '</div>'; 
         } else {

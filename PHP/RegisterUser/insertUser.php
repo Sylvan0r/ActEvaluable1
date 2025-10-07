@@ -36,7 +36,7 @@
 
     /* Comprobante de contraseña (en hash) */
     function validarPasswd(){
-        if((isset($_POST["passwd"]) && $_POST["passwd"]!=null)){
+        if((isset($_POST["passwd"]) && $_POST["passwd"]!=null && $_POST["passwd"]==$_POST["passwd2"])){
             $passwdHash = password_hash($_POST["passwd"], PASSWORD_DEFAULT);
             $_SESSION["passwd"] = $passwdHash;
             insert();

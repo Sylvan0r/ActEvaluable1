@@ -16,12 +16,12 @@
     <body>
         <h1>Inicio sesion</h1>
         <!-- Sección del formulario -->
-        <form action="loggerUser.php" method="post">         
+        <form action="loggerUser.php" method="post">        
+            <p style="color:white">Gmail: </p> 
             <input name="gmail" placeholder="Introduzca su Gmail">
             <br><br>
+            <p style="color:white">Contraseña: </p>
             <input name="passwd" type="password" placeholder="Introduzca su contraseña">
-            <br><br>
-            <input name="passwd2" type="password" placeholder="Introduzca su contraseña otra vez">
             <br><br>
             <button type="submit">Iniciar sesión</button>
         </form>

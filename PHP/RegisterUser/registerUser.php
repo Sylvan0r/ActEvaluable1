@@ -16,11 +16,17 @@
         <h1>Actividad Evaluable 1</h1>
         <!-- Sección del formulario -->
         <form action="insertUser.php" method="post">
+            <p style="color:white">Usuario: </p>
             <input name="user" type="text" placeholder="Introduzca su usuario">
-            <br><br>            
+            <br><br>   
+            <p style="color:white">Gmail: </p>         
             <input name="gmail" placeholder="Introduzca su Gmail">
             <br><br>
+            <p style="color:white">Contraseña: </p>
             <input name="passwd" type="password" placeholder="Introduzca su contraseña">
+            <br><br>
+            <p style="color:white">Contraseña otra vez: </p>
+            <input name="passwd2" type="password" placeholder="Introduzca su contraseña nuevamente">
             <br><br>
             <button type="submit">Registrar usuario</button>
         </form>

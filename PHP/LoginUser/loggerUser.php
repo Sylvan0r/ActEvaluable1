@@ -21,7 +21,7 @@
                 $array = $row;
             }
             /* Cuando todo sea correcto se iniciara sesion */
-            if(password_verify($_POST["passwd"], $array["Password"]) && $_POST["passwd"] = $_POST["passwd2"]){
+            if(password_verify($_POST["passwd"], $array["Password"])){
                 $_SESSION["exito"] = "Sesión iniciada como ". $array["Nombre"];
                 $_SESSION["user"] = $array["Nombre"];
                 $_SESSION["gmail"] = $array["Gmail"];
