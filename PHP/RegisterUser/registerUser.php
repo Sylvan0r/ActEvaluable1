@@ -23,7 +23,9 @@
             <input name="gmail" placeholder="Introduzca su Gmail">
             <br><br>
             <p style="color:white">Contraseña: </p>
-            <input name="passwd" type="password" placeholder="Introduzca su contraseña">
+            <input name="passwd" type="password" placeholder="Introduzca su contraseña" onkeyup="passwdVal(this.value)">            
+            <br>
+            <span id="val"></span>
             <br><br>
             <p style="color:white">Contraseña otra vez: </p>
             <input name="passwd2" type="password" placeholder="Introduzca su contraseña nuevamente">
@@ -32,6 +34,25 @@
         </form>
         <br>
         <a href="../../index.php"><button>Volver</button></a>
+
+        <script>               
+        $array = [];               
+            function passwdVal(str){
+                if (str.length == 0) {
+                    document.getElementById("val").innerHTML = "";
+                    return;
+                } else {
+                    var xmlhttp = new XMLHttpRequest();
+                    xmlhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        document.getElementById("val").innerHTML = this.responseText;
+                    }
+                    };
+                    xmlhttp.open("GET", "gethint.php?q=" + str, true);
+                    xmlhttp.send();
+                }
+            }
+        </script>
 
         <!-- Sección de errores y exitos -->        
         <?php
