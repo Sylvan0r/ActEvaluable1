@@ -1,27 +1,57 @@
-/*Base de como todo esta organizado*/
+/* Reset básico */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/*Seccion de los botones de loggin en el index.php*/
+/* ====== BODY Y ENCABEZADOS ====== */
+body {
+    background-image: linear-gradient(135deg, #0066ff, #3399ff);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: sans-serif;
+}
+
+h1 {
+    color: white;
+    font-size: 60px;
+    text-shadow: 1px 1px 2px #2d3436;
+    padding: 15px;
+}
+
+/* ====== BARRA SUPERIOR (botones login) ====== */
 .top-right {
-    position: fixed;      
-    top: 0;              
-    left: 0;             
-    width: 100%;        
-    background-color: white; 
-    padding: 10px 20px;  
-    display: flex;       
-    justify-content: flex-end;  
-    align-items: center; 
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2); 
-    z-index: 1000;       
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    z-index: 1000;
+}
+
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.top-left,
+.top-right {
+    display: flex;
+    gap: 10px;
 }
 
 .top-right button {
-    margin-left: 10px;  
+    margin-left: 10px;
     background-color: #007BFF;
     color: white;
     border: none;
@@ -36,38 +66,9 @@
     background-color: #e0eaff;
 }
 
-.top-bar {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px;
-}
-
-.top-left, .top-right {
-    display: flex;
-    gap: 10px;
-}
-
-
-/*Estilo de los encabezados en general*/
-h1{
-    color: white;
-    font-size: 60px;
-    text-shadow: 1px 1px 2px #2d3436;
-    padding: 15px;
-}
-
-/*Estilo del body de todas las paginas*/
-body {
-    background-image: linear-gradient(135deg, #0066ff, #3399ff);
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-/*Botones de todas las paginas*/
-button {
+/* ====== BOTONES GENERALES ====== */
+button,
+.btn {
     padding: 12px 25px;
     margin: 0 20px;
     background-color: #0984e3;
@@ -77,15 +78,70 @@ button {
     font-size: 16px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    box-shadow: 1px  2px #2d3436;
+    box-shadow: 1px 2px #2d3436;
+    text-decoration: none;
+    font-weight: bold;
+    display: inline-block;
+    text-align: center;
 }
 
-button:hover {
+button:hover,
+.btn:hover {
     background-color: #74b9ff;
 }
 
-/*Estilo de exito y errores*/
-.error, .exito {
+.btn.delete {
+    background-color: #d63031;
+}
+
+.btn.delete:hover {
+    background-color: #ff7675;
+}
+
+.back-button {
+    margin-top: 40px;
+    text-align: center;
+}
+
+/* ====== FORMULARIOS ====== */
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+/* Inputs y textareas */
+input,
+textarea {
+    width: 100%;
+    max-width: 400px;
+    padding: 10px 15px;
+    font-size: 16px;
+    font-family: inherit;
+    border: 2px solid #ccc;
+    border-radius: 6px;
+    background-color: #fff;
+    color: #333;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    resize: vertical;
+}
+
+input:focus,
+textarea:focus {
+    outline: none;
+    border-color: #0984e3;
+    box-shadow: 0 0 8px rgba(9, 132, 227, 0.5);
+    background-color: #f0f8ff;
+}
+
+textarea {
+    height: 120px;
+}
+
+/* ====== MENSAJES DE ESTADO ====== */
+.error,
+.exito {
     margin-top: 20px;
     padding: 10px 20px;
     border-radius: 5px;
@@ -102,34 +158,7 @@ button:hover {
     color: #2d3436;
 }
 
-form{
-    display: flex;
-    flex-direction: column;    
-}
-
-/* Estilo general para todos los inputs*/
-input{
-    width: 100%;                
-    max-width: 400px;           
-    padding: 10px 15px;         
-    border: 2px solid #ccc;     
-    border-radius: 6px;         
-    font-size: 16px;
-    font-family: inherit;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    background-color: #fff;
-    color: #333;
-    resize: vertical;           
-}
-
-input:focus{
-    outline: none;
-    border-color: #0984e3;      
-    box-shadow: 0 0 8px rgba(9, 132, 227, 0.5);
-    background-color: #f0f8ff;  
-}
-
-/* Estilo general de las imagenes */
+/* ====== SECCIÓN DE JUEGOS ====== */
 .games-container {
     display: flex;
     flex-wrap: wrap;
@@ -137,7 +166,7 @@ input:focus{
     gap: 40px;
     padding: 50px 20px;
     width: 100%;
-    margin-top: 60px; 
+    margin-top: 60px;
 }
 
 .game-card {
@@ -149,16 +178,6 @@ input:focus{
     box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     width: 300px;
     transition: transform 0.3s ease;
-}
-
-.game-card .name {
-    color: white;
-    font-size: 22px;
-    margin-bottom: 5px;
-    text-shadow: 1px 1px 2px #2d3436;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
 }
 
 .game-card:hover {
@@ -182,6 +201,9 @@ input:focus{
     font-size: 22px;
     margin-bottom: 5px;
     text-shadow: 1px 1px 2px #2d3436;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .game-card .date {
@@ -194,15 +216,10 @@ input:focus{
     margin-bottom: 10px;
 }
 
-.back-button {
-    margin-top: 40px;
-    text-align: center;
-}
-
-/* Estilo extra de gameDetails*/
+/* ====== DETALLES DEL JUEGO ====== */
 .game-details {
     max-width: 600px;
-    background-color: rgba(255,255,255,0.1);
+    background-color: rgba(255, 255, 255, 0.1);
     padding: 30px;
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.3);
@@ -217,7 +234,7 @@ input:focus{
     margin-bottom: 20px;
     white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis;    
+    text-overflow: ellipsis;
 }
 
 .game-year,
@@ -235,50 +252,9 @@ input:focus{
     box-shadow: 0 4px 8px rgba(0,0,0,0.4);
 }
 
-textarea {
-    width: 100%;
-    max-width: 400px;
-    height: 120px;
-    padding: 10px 15px;
-    font-size: 16px;
-    font-family: inherit;
-    border: 2px solid #ccc;
-    border-radius: 6px;
-    resize: vertical;
-    background-color: #fff;
-    color: #333;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-}
-
 .game-actions {
     margin-top: 30px;
     display: flex;
     justify-content: center;
     gap: 20px;
-}
-
-.btn {
-    padding: 10px 20px;
-    text-decoration: none;
-    font-weight: bold;
-    background-color: #0984e3;
-    color: white;
-    border-radius: 6px;
-    transition: background-color 0.3s ease;
-}
-
-.btn:hover {
-    background-color: #74b9ff;
-}
-
-.btn.delete {
-    background-color: #d63031;
-}
-
-.btn.delete:hover {
-    background-color: #ff7675;
-}
-
-.back-button {
-    margin-top: 30px;
 }
