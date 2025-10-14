@@ -17,17 +17,34 @@
     
     $conn = new mysqli($dbHost, $dbUsername, $dbPassword, $dbName);
     $stmtcr = $conn->prepare("CREATE TABLE IF NOT EXISTS users(
+                                        ID int not null unique auto_increment,
                                         Nombre varchar(255), 
                                         Gmail varchar(255), 
-                                        Password varchar(255), 
+                                        Password varchar(255),
+                                        userImg BLOB, 
                                         PRIMARY KEY(Gmail))");
     $stmtcr->execute();
     $stmtcr->close();
 
-    $passwd = password_hash(1234, PASSWORD_DEFAULT);
-    $stmtcr = $conn->prepare("INSERT IGNORE INTO users (Nombre, Gmail, Password) VALUES ('admin', 'test@gmail.com', '$passwd')");
-    $stmtcr->execute();
-    $stmtcr->close();
+    $nombre = 'admin';
+    $gmail = 'test@gmail.com';    
+    $passwd = password_hash('1234', PASSWORD_DEFAULT);
+    $defaultImagePath = '../IMG/default-placeholder.png'; 
+
+    if (!file_exists($defaultImagePath)) {
+        die("La imagen por defecto no se encontró en: $defaultImagePath");
+    }
+
+    $imgContent = file_get_contents($defaultImagePath);
+    $stmt = $conn->prepare("INSERT IGNORE INTO users (Nombre, Gmail, Password, userImg) VALUES (?, ?, ?, ?)");
+    $stmt->bind_param("ssss", $nombre, $gmail, $passwd, $imgContent);
+
+    if (!$stmt->execute()) {
+        die("Error al insertar usuario: " . $stmt->error);
+    }
+
+    $stmt->close();
+
 
     $stmtcr = $conn->prepare("CREATE TABLE IF NOT EXISTS games (ID INT NOT NULL AUTO_INCREMENT, 
                                                                         Título varchar(255), 

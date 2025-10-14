@@ -11,16 +11,31 @@
     <body>
         <!-- Botones de registro -->
         <div class="top-right">
-            <h2>Tienda de juegos</h2>
-            <button onclick="register()">Registrar usuario</button>
-            <button onclick="login()">Iniciar sesion</button>
-            <!-- Boton de salir de sesion, se esconde cuando no hay sesion iniciada -->
-            <?php if (isset($_SESSION["user"]) && $_SESSION["user"] != ""): ?>
-                <button onclick="games()">Registrar juegos</button>
-            <?php endif; ?>                
-            <?php if (isset($_SESSION["user"]) && $_SESSION["user"] != ""): ?>
-                <button onclick="logout()">Cerrar sesión</button>
-            <?php endif; ?>                     
+            <h2 class="top-left">Tienda de juegos</h2>
+                <?php if (!isset($_SESSION["user"])): ?>            
+                    <button onclick="register()">Registrar usuario</button>
+                    <button onclick="login()">Iniciar sesion</button>
+                <?php endif; ?>               
+                <?php if (isset($_SESSION["user"]) && $_SESSION["user"] != ""): ?>
+                    <button onclick="games()">Registrar juegos</button>
+                <?php endif; ?>               
+            <!-- Boton de salir de sesion, se esconde cuando no hay sesion iniciada -->           
+            <?php if (isset($_SESSION["user"]) && $_SESSION["user"] != ""): 
+                include "PHP/connection.php";
+                $result = $conn->query("SELECT userImg FROM users where Gmail like '$_SESSION[gmail]'");
+                    while ($row = $result->fetch_assoc()) {
+                        echo '<button onclick="show()"><img width="30" height="30" src="data:image/jpg;base64,' . base64_encode($row['userImg']) . '" alt="Carátula del juego"></button>';                    
+                    }
+                ?>           
+                <div id="extraBut" style="display: none;">             
+                    <?php if (isset($_SESSION["user"]) && $_SESSION["user"] != ""): ?>
+                        <button onclick="userInfo()">Información usuario</button>
+                    <?php endif; ?>
+                    <?php if (isset($_SESSION["user"]) && $_SESSION["user"] != ""): ?>
+                        <button onclick="logout()">Cerrar sesión</button>
+                    <?php endif; ?>                    
+                </div>     
+            <?php endif; ?>                          
         </div>
         
         <div>
@@ -30,8 +45,10 @@
         </div>   
 
         <?php
-            include "PHP/Games/showGames.php";
-            showGames();
+            if (isset($_SESSION["user"]) && $_SESSION["user"] != ""){
+                include "PHP/Games/showGames.php";
+                showGames();
+            }
         ?>   
 
         <!-- Funciones de los botones al ser pulsados -->         
@@ -64,6 +81,12 @@
             function games(){
                 window.location.href = "PHP/Games/registerGame.php"                
             }
+            function show(){
+                document.getElementById("extraBut").style = "display:block";
+            }
+            function userInfo(){
+                window.location.href = "PHP/User/userInfo.php"                
+            }            
         </script>
 
         <!-- Sección de errores y exitos -->

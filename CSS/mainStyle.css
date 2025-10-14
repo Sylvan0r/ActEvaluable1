@@ -25,9 +25,6 @@ h1 {
 
 /* ====== BARRA SUPERIOR (botones login) ====== */
 .top-right {
-    position: fixed;
-    top: 0;
-    left: 0;
     width: 100%;
     background-color: white;
     padding: 10px 20px;
@@ -48,6 +45,10 @@ h1 {
 .top-right {
     display: flex;
     gap: 10px;
+}
+
+.top-left{
+    margin-right: auto;
 }
 
 .top-right button {
