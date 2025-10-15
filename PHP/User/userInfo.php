@@ -26,8 +26,8 @@
         ?>   
         <br><br>
         
-        <button></button>
-
+        <a href="editUser.php"><button>Editar perfil</button></a>
+        <br>
         <a href="../../index.php"><button>Volver</button></a>
         
         <!-- Sección de errores y exitos -->

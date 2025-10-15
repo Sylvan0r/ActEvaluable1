@@ -54,6 +54,8 @@
                                                                         Caratula_hash varchar(64),
                                                                         año date, 
                                                                         userID varchar(255), 
+                                                                        likes int,
+                                                                        dislikes int,
                                                                         PRIMARY KEY(ID), 
                                                                         FOREIGN KEY (userID) REFERENCES users(Gmail))");
     $stmtcr->execute();
