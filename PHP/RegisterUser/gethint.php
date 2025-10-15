@@ -31,7 +31,7 @@
         }
     } 
 
-    $hint .= "</ul>";
+    $hint .= "</ul><br>";
 
     echo $hint === "" ? "Contraseña cumple los parametros" : $hint;
 ?>

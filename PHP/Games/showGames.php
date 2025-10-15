@@ -1,13 +1,10 @@
 <?php
     /* Si no hay nadie como login entonces nos redirige a la pagina */
 
-
-
     function showGames() {
         include "PHP/connection.php";
         /* Query que da todos los resultados dentro de la tabla games */
         $result = $conn->query("SELECT ID, Título, Año, Caratula FROM games");
-
         if ($result->num_rows > 0) {
             echo '<div class="games-container">';
             /* HTML hecho con echo con valores del query */
@@ -28,10 +25,3 @@
         }
     }
 ?>
-
-<html>
-    <head>
-        <title>Biblioteca de juegos</title>
-        <link rel="stylesheet" href="../../CSS/mainStyle.css">
-    </head>
-</html>

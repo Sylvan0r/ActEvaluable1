@@ -4,7 +4,7 @@
     searchGames($q);
     
     function searchGames($name){
-        include "connection.php";
+        include "../connection.php";
         /* Query que da todos los stmtados dentro de la tabla games */
 
         $name = "%".$name."%";

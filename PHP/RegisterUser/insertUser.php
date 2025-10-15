@@ -64,8 +64,17 @@
         $check->close();
 
         /* Inserción dentro de la BD */
-        $stmt = $conn->prepare("INSERT INTO users(Nombre,Gmail,Password) VALUES (?,?,?)");
-        $stmt ->bind_param("sss", $_SESSION["user"], $_SESSION["gmail"], $_SESSION["passwd"]) ;
+        if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+            $image = $_FILES["image"]["tmp_name"];
+            $imgContent = file_get_contents($image);
+            $imageHash = hash('sha256', $imgContent);
+        } else {
+            $defaultImagePath = '../../IMG/default-placeholder.png'; 
+            $imgContent = file_get_contents($defaultImagePath);
+        }
+
+        $stmt = $conn->prepare("INSERT INTO users(Nombre,Gmail,Password,userImg) VALUES (?,?,?,?)");
+        $stmt ->bind_param("ssss", $_SESSION["user"], $_SESSION["gmail"], $_SESSION["passwd"],$imgContent) ;
         $stmt->execute();
 
         $_SESSION["exito"] = "Cuenta creada con exito";
