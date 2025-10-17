@@ -13,7 +13,7 @@
          <header>
             <div class="top-right">
                 <h2 class="top-left">Tienda de juegos</h2>
-                <input class="top-left" placeholder="Introducir nombre de juego" name="busquedajuegos" onkeyup="search(this.value)">
+                <input class="top-left" placeholder="Introducir nombre de juego" name="busquedajuegos" onkeyup="search(this.value)" onkeydown="search(this.value)">
                     <?php if (!isset($_SESSION["user"])): ?>            
                         <a href="PHP/RegisterUser/registerUser.php"><button>Registrar usuario</button></a>
                         <a href="PHP/LoginUser/loginUser.php"><button>Iniciar sesion</button></a>
@@ -44,18 +44,19 @@
         <div>
             <span id="showGames"></span>
         </div>   
-
-        <?php
-            include "PHP/Games/showGames.php";
-            showGames();
-        ?>
-
+        <div id="test">
+            <?php
+                include "PHP/Games/showGames.php";
+                showGames();
+            ?>
+        </div>
         <!-- Funciones de los botones al ser pulsados -->         
         <script>
             $array = [];               
             function search(str) {
                 if (str == "") {
                     document.getElementById("showGames").innerHTML = "";
+                    document.getElementById("test").style.display = "flex";
                     return;
                 } else {
                     var xmlhttp = new XMLHttpRequest();
@@ -65,10 +66,11 @@
                         }
                     };
                     xmlhttp.open("GET","PHP/Games/searchGame.php?q="+str,true);
-                    xmlhttp.send();
+                    xmlhttp.send();                  
+                    document.getElementById("test").style.display = "none";
                 }
             }    
-                 
+
             function show(){
                 document.getElementById("extraBut").style.display = "block";
             }     
