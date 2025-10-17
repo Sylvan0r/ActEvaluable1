@@ -3,7 +3,6 @@
     $dbHost     = "localhost";  
     $dbUsername = "root";  
     $dbPassword = "";  
-    $dbName     = "actev1";
 
     $conn = new mysqli($dbHost, $dbUsername, $dbPassword);
 
@@ -15,10 +14,13 @@
     $stmtcr->execute();
     $stmtcr->close();
     
+    $dbName= "ActEv1";
+
+
     $conn = new mysqli($dbHost, $dbUsername, $dbPassword, $dbName);
     $stmtcr = $conn->prepare("CREATE TABLE IF NOT EXISTS users(
                                         ID int not null unique auto_increment,
-                                        Nombre varchar(255), 
+                                        Nombre varchar(255) unique, 
                                         Gmail varchar(255), 
                                         Password varchar(255),
                                         userImg BLOB, 
@@ -47,17 +49,27 @@
 
 
     $stmtcr = $conn->prepare("CREATE TABLE IF NOT EXISTS games (ID INT NOT NULL AUTO_INCREMENT, 
-                                                                        Título varchar(255), 
+                                                                        Título varchar(255) unique, 
                                                                         Descripción varchar(255), 
                                                                         Compañia varchar(255), 
                                                                         Caratula BLOB, 
                                                                         Caratula_hash varchar(64),
                                                                         año date, 
-                                                                        userID varchar(255), 
-                                                                        likes int,
-                                                                        dislikes int,
+                                                                        userID varchar(255),
                                                                         PRIMARY KEY(ID), 
-                                                                        FOREIGN KEY (userID) REFERENCES users(Gmail))");
+                                                                        FOREIGN KEY (userID) REFERENCES users(Gmail) on delete cascade)");
+    $stmtcr->execute();
+    $stmtcr->close();    
+
+    $stmtcr = $conn->prepare("CREATE TABLE IF NOT EXISTS gamesLikes (
+                                                                            nombreJuego varchar(255),
+                                                                            likes int(1),
+                                                                            dislikes int(1),
+                                                                            userName varchar(255),
+                                                                            PRIMARY KEY (nombreJuego, userName),
+                                                                            FOREIGN KEY (nombreJuego) REFERENCES games(`Título`) on delete cascade,
+                                                                            FOREIGN KEY (userName) REFERENCES users(Nombre) on delete cascade
+                                                                        ) ENGINE=InnoDB");
     $stmtcr->execute();
     $stmtcr->close();    
 

@@ -45,12 +45,10 @@
             <span id="showGames"></span>
         </div>   
 
-        <?php if (isset($_SESSION["user"]) && $_SESSION["user"] != ""): ?>  
-            <?php
-                include "PHP/Games/showGames.php";
-                showGames();
-            ?>
-        <?php endif;?>
+        <?php
+            include "PHP/Games/showGames.php";
+            showGames();
+        ?>
 
         <!-- Funciones de los botones al ser pulsados -->         
         <script>

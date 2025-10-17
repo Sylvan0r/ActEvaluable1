@@ -23,6 +23,10 @@
             <p style="color:white">Contraseña: </p>
             <input name="passwd" type="password" placeholder="Introduzca su contraseña">
             <br><br>
+            <div id="checkbox">
+                <input type="checkbox">
+                <p>Recordar sesión</p>
+            </div>
             <button type="submit">Iniciar sesión</button>
         </form>
         <br>

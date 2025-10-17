@@ -16,7 +16,7 @@
                 $deleteStmt = $conn->prepare("DELETE FROM games WHERE ID = ?");
                 $deleteStmt->bind_param("s", $id);
                 $deleteStmt->execute();
-                header("Location: showGames.php");
+                header("Location: ../../index.php");
                 exit();
             } else {
                 die("No tienes permiso para borrar este juego.");
