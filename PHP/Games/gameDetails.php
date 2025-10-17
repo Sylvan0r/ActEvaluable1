@@ -53,18 +53,32 @@
                 <div class="game-actions">                    
                     <button onclick="darLike(<?php echo $id; ?>)">Like</button>
                     <?php
+                        // Forzar tipos a entero por seguridad
+                        $likes = isset($likes) ? (int)$likes : 0;
+                        $dislikes = isset($dislikes) ? (int)$dislikes : 0;
+
                         $totalVotos = $likes + $dislikes;
+
+                        echo '<div class="like-bar">';
 
                         if ($totalVotos > 0) {
                             $porcentajeLikes = round(($likes / $totalVotos) * 100);
                             $porcentajeDislikes = 100 - $porcentajeLikes;
-                            echo '<p>Le gusta al ' . $porcentajeLikes . '% de los usuarios.</p>';
+
+                            echo '<p>👍 Le gusta al ' . $porcentajeLikes . '% de los usuarios</p>';
                             echo '<progress value="' . $porcentajeLikes . '" max="100"></progress>';
-                        } else {
+                        }else{
+                                    
+                        }
+                        
+                        if(is_null($likes) && is_null($dislikes)){
                             echo '<p>Este juego aún no tiene votos.</p>';
                             echo '<progress value="0" max="100"></progress>';
                         }
+
+                        echo '</div>';
                     ?>
+
                     <button onclick="darDislike(<?php echo $id; ?>)">Dislike</button>
                 </div>
 
