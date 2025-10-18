@@ -15,7 +15,6 @@
         <link rel="stylesheet" href="../../CSS/mainStyle.css">
     </head>
     <body>
-
     <div class="user-info">
         <h1>Información del usuario</h1>
 
@@ -62,6 +61,5 @@
             }
         ?>
     </div>
-
     </body>
 </html>

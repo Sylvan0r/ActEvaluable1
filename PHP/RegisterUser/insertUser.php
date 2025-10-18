@@ -34,15 +34,53 @@
         }
     }
 
-    /* Comprobante de contraseña (en hash) */
     function validarPasswd(){
-        if((isset($_POST["passwd"]) && $_POST["passwd"]!=null && $_POST["passwd"]==$_POST["passwd2"])){
-            $passwdHash = password_hash($_POST["passwd"], PASSWORD_DEFAULT);
+        if(isset($_POST["passwd"]) && $_POST["passwd"] != null && $_POST["passwd"] == $_POST["passwd2"]){
+            $password = $_POST["passwd"];
+
+            // Verificar longitud mínima
+            if(strlen($password) < 8){
+                $_SESSION["error"] = "La contraseña tiene menos de 8 caracteres";
+                header("Location: registerUser.php");
+                exit();
+            }
+
+            // Verificar que tenga al menos un número
+            if(!preg_match("/[0-9]/", $password)){
+                $_SESSION["error"] = "La contraseña debe tener al menos un número";
+                header("Location: registerUser.php");
+                exit();
+            }
+
+            // Verificar que tenga al menos una letra minúscula
+            if(!preg_match("/[a-z]/", $password)){
+                $_SESSION["error"] = "La contraseña debe tener al menos una letra minúscula";
+                header("Location: registerUser.php");
+                exit();
+            }
+
+            // Verificar que tenga al menos una letra mayúscula
+            if(!preg_match("/[A-Z]/", $password)){
+                $_SESSION["error"] = "La contraseña debe tener al menos una letra mayúscula";
+                header("Location: registerUser.php");
+                exit();
+            }
+
+            // Verificar que tenga al menos un carácter especial
+            if(!preg_match("/[\W_]/", $password)){ // \W = cualquier caracter no alfanumérico, _ incluido
+                $_SESSION["error"] = "La contraseña debe tener al menos un carácter especial";
+                header("Location: registerUser.php");
+                exit();
+            }
+
+            // Si pasa todas las validaciones, se hace hash
+            $passwdHash = password_hash($password, PASSWORD_DEFAULT);
             $_SESSION["passwd"] = $passwdHash;
             insert();
-        }else{
-            $_SESSION["error"] = "La contraseña es obligatoria";
-            header("Location: registerUser.php");                    
+        } else {
+            $_SESSION["error"] = "La contraseña es obligatoria y debe coincidir";
+            header("Location: registerUser.php");
+            exit();
         }
     }
 
@@ -69,7 +107,7 @@
             $imgContent = file_get_contents($image);
             $imageHash = hash('sha256', $imgContent);
         } else {
-            $defaultImagePath = '../../IMG/default-placeholder.png'; 
+            $defaultImagePath = '../../IMG/1053244.png'; 
             $imgContent = file_get_contents($defaultImagePath);
         }
 

@@ -51,7 +51,7 @@
                     include "PHP/connection.php";
                     $result = $conn->query("SELECT userImg FROM users where Gmail like '$_SESSION[gmail]'");
                         while ($row = $result->fetch_assoc()) {
-                            echo '<button onclick="show()"><img width="30" height="30" src="data:image/jpg;base64,' . base64_encode($row['userImg']) . '" alt="Carátula del juego"></button>';                    
+                            echo '<img onclick="show()" width="50" height="50" src="data:image/jpg;base64,' . base64_encode($row['userImg']) . '" alt="Carátula del juego">';                    
                         }
                     ?>           
                     <div id="extraBut" style="display: none;">             

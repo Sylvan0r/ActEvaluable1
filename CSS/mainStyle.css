@@ -68,6 +68,24 @@ header {
     margin-right: auto;
 }
 
+/* Icono de usuario */
+.top-left img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%; /* lo hace circular */
+    border: 2px solid #ff70ab; /* borde neón rosa */
+    box-shadow: 0 0 5px #ff70ab, 0 0 10px #ff3d81;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-right: 10px; /* espacio respecto al texto */
+    object-fit: cover; /* mantiene la proporción de la imagen */
+}
+
+.top-left img:hover {
+    transform: scale(1.1); /* efecto “agrandar” al pasar el mouse */
+    box-shadow: 0 0 8px #ff70ab, 0 0 15px #ff3d81; /* brillo más intenso */
+}
+
 .top-right button {
     margin-left: 10px;
     background-color: #007BFF;
