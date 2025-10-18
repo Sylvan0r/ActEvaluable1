@@ -24,6 +24,7 @@
                                         Gmail varchar(255), 
                                         Password varchar(255),
                                         userImg BLOB, 
+                                        remember_token varchar(64) NULL,
                                         PRIMARY KEY(Gmail))");
     $stmtcr->execute();
     $stmtcr->close();

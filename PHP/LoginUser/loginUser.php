@@ -1,4 +1,3 @@
-<!-- Quitamos todo lo importante de sesion para que no tengan conflictos a futuro por si entran de otro lado -->
 <?php
     session_start();
     $_SESSION["user"] = null;
@@ -14,34 +13,35 @@
     </head>
 
     <body>
-        <h1>Inicio sesion</h1>
-        <!-- Sección del formulario -->
+        <h1>Inicio de sesión</h1>
+
         <form action="loggerUser.php" method="post">        
             <p style="color:white">Gmail: </p> 
-            <input name="gmail" placeholder="Introduzca su Gmail">
+            <input name="gmail" placeholder="Introduzca su Gmail" required>
             <br><br>
             <p style="color:white">Contraseña: </p>
-            <input name="passwd" type="password" placeholder="Introduzca su contraseña">
+            <input name="passwd" type="password" placeholder="Introduzca su contraseña" required>
             <br><br>
+
             <div id="checkbox">
-                <input type="checkbox">
-                <p>Recordar sesión</p>
+                <input type="checkbox" name="remember" value="1">
+                <label for="remember">Recordar sesión</label>
             </div>
+            <br>
+
             <button type="submit">Iniciar sesión</button>
         </form>
+
         <br>
         <a href="../../index.php"><button>Volver</button></a>
 
-        <!-- Sección de errores y exitos -->        
         <?php
             if(isset($_SESSION["error"]) && $_SESSION["error"] != "") {
-                echo "<br>";
-                echo "<p class='error'>Error: " . $_SESSION["error"] . "</p>";
+                echo "<br><p class='error'>Error: " . $_SESSION["error"] . "</p>";
                 $_SESSION["error"] = "";
             }
-            if(isset( $_SESSION["exito"]) && $_SESSION["exito"] != "") {
-                echo "<br>";
-                echo "<p>Exito: " . $_SESSION["exito"] . "</p>";
+            if(isset($_SESSION["exito"]) && $_SESSION["exito"] != "") {
+                echo "<br><p>Éxito: " . $_SESSION["exito"] . "</p>";
                 $_SESSION["exito"] = "";
             }
         ?>        

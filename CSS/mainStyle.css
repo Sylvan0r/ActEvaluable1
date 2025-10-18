@@ -281,3 +281,76 @@ textarea {
     justify-content: center;
     gap: 20px;
 }
+
+/* ====== SECCIÓN DE INFORMACIÓN DEL USUARIO ====== */
+.user-info {
+    margin-top: 120px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 40px;
+    border-radius: 16px;
+    max-width: 500px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 6px 20px rgba(0, 255, 255, 0.15);
+    backdrop-filter: blur(8px);
+}
+
+.user-info h1 {
+    font-size: 36px;
+    color: #00bfff;
+    text-shadow: 0 0 10px #00bfff;
+    margin-bottom: 25px;
+}
+
+.user-info img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 3px solid #00bfff55;
+    box-shadow: 0 4px 12px rgba(0, 191, 255, 0.4);
+    margin-bottom: 20px;
+    object-fit: cover;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.user-info img:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 18px rgba(0, 191, 255, 0.6);
+}
+
+.user-info h2 {
+    font-size: 20px;
+    color: #00ffff;
+    margin: 10px 0 5px;
+    text-shadow: 0 0 5px #00bfff;
+}
+
+.user-info p {
+    font-size: 18px;
+    color: #e0f7ff;
+    margin-bottom: 15px;
+    word-break: break-word;
+}
+
+.user-info a {
+    text-decoration: none;
+}
+
+.user-info button {
+    margin: 10px 5px;
+    background: linear-gradient(135deg, #0066ff, #00bfff);
+    color: #fff;
+    padding: 10px 22px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 150, 255, 0.3);
+}
+
+.user-info button:hover {
+    background: linear-gradient(135deg, #00bfff, #0066ff);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 180, 255, 0.4);
+}
