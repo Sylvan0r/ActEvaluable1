@@ -57,6 +57,7 @@
                                                                         Caratula_hash varchar(64),
                                                                         año date, 
                                                                         userID varchar(255),
+                                                                        views int default 0,
                                                                         PRIMARY KEY(ID), 
                                                                         FOREIGN KEY (userID) REFERENCES users(Gmail) on delete cascade)");
     $stmtcr->execute();

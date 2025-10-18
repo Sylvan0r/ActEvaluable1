@@ -56,7 +56,10 @@
                     ?>           
                     <div id="extraBut" style="display: none;">             
                         <?php if (isset($_SESSION["user"]) && $_SESSION["user"] != ""): ?>
-                            <a href="PHP/User/userInfo.php"><button onclick="userInfo()">Información usuario</button></a>
+                            <a href="PHP/User/userInfo.php"><button>Información usuario</button></a>
+                        <?php endif; ?>                        
+                        <?php if (isset($_SESSION["user"]) && $_SESSION["user"] != ""): ?>
+                            <a href="PHP\Games\gamesStats.php"><button>Estadisticas juegos</button></a>
                         <?php endif; ?>
                         <?php if (isset($_SESSION["user"]) && $_SESSION["user"] != ""): ?>
                             <a href="PHP/User/logout.php"><button>Cerrar sesión</button></a>
