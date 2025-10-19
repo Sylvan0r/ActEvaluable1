@@ -305,17 +305,16 @@ textarea {
     margin-top: 120px;
     background: rgba(255, 255, 255, 0.05);
     padding: 40px;
-    border-radius: 16px;
+    border: 1px white solid;
     max-width: 500px;
     width: 90%;
     text-align: center;
-    box-shadow: 0 6px 20px rgba(0, 255, 255, 0.15);
     backdrop-filter: blur(8px);
 }
 
 .user-info h1 {
     font-size: 36px;
-    color: #00bfff;
+    color: #ffffff;
     text-shadow: 0 0 10px #00bfff;
     margin-bottom: 25px;
 }
@@ -338,7 +337,7 @@ textarea {
 
 .user-info h2 {
     font-size: 20px;
-    color: #00ffff;
+    color: #ffffff;
     margin: 10px 0 5px;
     text-shadow: 0 0 5px #00bfff;
 }

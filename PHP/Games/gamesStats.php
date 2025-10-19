@@ -66,12 +66,12 @@
                     echo '<p>Este juego aún no tiene votos.</p>';
                     echo '<progress value="0" max="100"></progress>';
                 } else {
-                    echo '<p>👍 ' . $porcentajeLikes . '% de likes (' . $likes . '/' . $totalVotos . ')</p>';
-                    echo '<p>👥 Total de personas que han votado: ' . $numUsuarios . '</p>';
+                    echo '<p>' . $porcentajeLikes . '% de likes (' . $likes . '/' . $totalVotos . ')</p>';
+                    echo '<p>Total de personas que han votado: ' . $numUsuarios . '</p>';
                     echo '<progress value="' . $porcentajeLikes . '" max="100"></progress>';
                 }
 
-                echo '<p>👀 Visualizaciones totales: ' . $views . '</p>';
+                echo '<p>Visualizaciones totales: ' . $views . '</p>';
                 echo '<a href="gameDetails.php?id=' . urlencode($gameId) . '" class="btn">Ver detalles</a>';
                 echo '</div>';
                 $stmtLikes->close();

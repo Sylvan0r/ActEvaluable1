@@ -69,7 +69,7 @@
         </div>
 
         <div class="game-actions">
-            <button onclick="darLike(<?php echo $id; ?>)">Like 👍</button>
+            <button onclick="darLike(<?php echo $id; ?>)">Like</button>
 
             <div class="like-bar">
                 <?php
@@ -79,16 +79,16 @@
                     echo '<progress value="0" max="100"></progress>';
                 } else {
                     $porcentajeLikes = round(($likes / $totalVotos) * 100);
-                    echo '<p>👍 Le gusta al ' . $porcentajeLikes . '% de los usuarios (' . $likes . '/' . $totalVotos . ')</p>';
-                    echo '<p>👥 Total de personas que han votado: ' . $numPersonas . '</p>';
+                    echo '<p>Le gusta al ' . $porcentajeLikes . '% de los usuarios (' . $likes . '/' . $totalVotos . ')</p>';
+                    echo '<p>Total de personas que han votado: ' . $numPersonas . '</p>';
                     echo '<progress value="' . $porcentajeLikes . '" max="100"></progress>';
                 }
                 ?>
             </div>
-            <button onclick="darDislike(<?php echo $id; ?>)">Dislike 👎</button>
+            <button onclick="darDislike(<?php echo $id; ?>)">Dislike</button>
         </div>
 
-        <p class="game-views">👀 Visualizaciones totales: <?php echo $views; ?></p>
+        <p class="game-views">Visualizaciones totales: <?php echo $views; ?></p>
 
         <?php
             // Mostrar opciones de edición solo al creador
