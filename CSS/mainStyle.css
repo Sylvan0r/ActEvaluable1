@@ -12,6 +12,10 @@ html, body {
     padding: 0;
 }
 
+button:hover{
+    transform: scale(1.05); 
+}
+
 body {    
     background-image: linear-gradient(135deg, #0066ff, #3399ff);
     background-size: cover; /* o 100% 100% */
@@ -30,6 +34,7 @@ h1 {
     font-size: 60px;
     text-shadow: 1px 1px 2px #2d3436;
     padding: 15px;
+    text-shadow: 0 0 10px #00bfff;
 }
 
 /* ====== BARRA SUPERIOR (botones login) ====== */
@@ -69,21 +74,19 @@ header {
 }
 
 /* Icono de usuario */
-.top-left img {
+.top-right img {
     width: 40px;
     height: 40px;
-    border-radius: 50%; /* lo hace circular */
-    border: 2px solid #ff70ab; /* borde neón rosa */
-    box-shadow: 0 0 5px #ff70ab, 0 0 10px #ff3d81;
+    border-radius: 50px; 
+    border: 2px solid #007BFF; 
     cursor: pointer;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    margin-right: 10px; /* espacio respecto al texto */
-    object-fit: cover; /* mantiene la proporción de la imagen */
+    margin-right: 10px;
+    object-fit: cover; 
 }
 
-.top-left img:hover {
-    transform: scale(1.1); /* efecto “agrandar” al pasar el mouse */
-    box-shadow: 0 0 8px #ff70ab, 0 0 15px #ff3d81; /* brillo más intenso */
+.top-right img:hover {
+    transform: scale(1.1); 
 }
 
 .top-right button {
@@ -96,10 +99,7 @@ header {
     cursor: pointer;
     font-weight: bold;
     transition: background-color 0.3s ease;
-}
-
-.top-right button:hover {
-    background-color: #e0eaff;
+    box-shadow: 0 4px 10px rgba(0, 150, 255, 0.3);
 }
 
 /* ====== BOTONES GENERALES ====== */
@@ -114,7 +114,7 @@ button,
     font-size: 16px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    box-shadow: 1px 2px #2d3436;
+    box-shadow: 0 4px 10px rgba(0, 150, 255, 0.3);
     text-decoration: none;
     font-weight: bold;
     display: inline-block;
@@ -241,7 +241,7 @@ textarea {
     color: white;
     font-size: 22px;
     margin-bottom: 5px;
-    text-shadow: 1px 1px 2px #2d3436;
+    text-shadow: 0 0 10px #00bfff;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -307,6 +307,7 @@ textarea {
     padding: 40px;
     border: 1px white solid;
     max-width: 500px;
+    border-radius: 50px;
     width: 90%;
     text-align: center;
     backdrop-filter: blur(8px);
@@ -355,7 +356,7 @@ textarea {
 
 .user-info button {
     margin: 10px 5px;
-    background: linear-gradient(135deg, #0066ff, #00bfff);
+    background-color: #007BFF;
     color: #fff;
     padding: 10px 22px;
     border: none;
@@ -367,9 +368,7 @@ textarea {
 }
 
 .user-info button:hover {
-    background: linear-gradient(135deg, #00bfff, #0066ff);
     transform: translateY(-2px);
-    box-shadow: 0 6px 15px rgba(0, 180, 255, 0.4);
 }
 
 /* ====== ESTADÍSTICAS DE JUEGOS DEL USUARIO ====== */
@@ -445,7 +444,7 @@ textarea {
     padding: 10px 20px;
     font-size: 16px;
     border-radius: 8px;
-    box-shadow: 1px 2px #2d3436;
+    box-shadow: 0 4px 10px rgba(0, 150, 255, 0.3);
 }
 
 .stat-card .btn:hover {
@@ -460,7 +459,7 @@ textarea {
     border-radius: 8px;
     background-color: #0984e3;
     color: white;
-    box-shadow: 1px 2px #2d3436;
+    box-shadow: 0 4px 10px rgba(0, 150, 255, 0.3);
     cursor: pointer;
     transition: background-color 0.3s ease;
 }

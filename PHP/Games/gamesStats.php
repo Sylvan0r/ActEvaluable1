@@ -36,14 +36,8 @@
                 $caratulaBase64 = base64_encode($row['Caratula']);
 
                 // Obtener total de likes y dislikes por juego
-                $stmtLikes = $conn->prepare("
-                    SELECT 
-                        COALESCE(SUM(likes),0) AS totalLikes,
-                        COALESCE(SUM(dislikes),0) AS totalDislikes,
-                        COUNT(DISTINCT userName) AS totalUsuarios
-                    FROM gamesLikes
-                    WHERE nombreJuego = (SELECT Título FROM games WHERE ID = ?)
-                ");
+                $stmtLikes = $conn->prepare("SELECT COALESCE(SUM(likes),0) AS totalLikes,COALESCE(SUM(dislikes),0) AS totalDislikes,COUNT(DISTINCT userName) AS totalUsuarios
+                    FROM gamesLikes WHERE nombreJuego = (SELECT Título FROM games WHERE ID = ?)");
                 $stmtLikes->bind_param("i", $gameId);
                 $stmtLikes->execute();
                 $resultLikes = $stmtLikes->get_result();
@@ -82,6 +76,7 @@
 
         } else {
             echo "<h2>No has subido ningún juego.</h2>";
+            echo '<a href="../../index.php"><button>Volver</button></a>';
         }
 
         $stmt->close();
