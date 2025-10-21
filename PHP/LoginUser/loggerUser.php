@@ -43,9 +43,7 @@
                     $token,
                     time() + (86400 * 7), // 7 días
                     "/", 
-                    "", // dominio actual
-                    true, // Secure: solo HTTPS (puedes poner false si estás en local)
-                    true  // HttpOnly: no accesible desde JS
+                    ""
                 );
             }
 

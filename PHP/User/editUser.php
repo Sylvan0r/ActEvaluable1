@@ -38,10 +38,10 @@
                 <input type="password" name="currentPass" placeholder="Introduzca su contraseña antigua" required>
 
                 <h2>Introduzca su contraseña nueva</h2>
-                <input type="password" name="newPasswd" placeholder="Introduzca su nueva contraseña" required>
+                <input type="password" name="newPasswd" placeholder="Introduzca su nueva contraseña">
 
                 <h2>Introduzca su contraseña nueva</h2>
-                <input type="password" name="newPasswd2" placeholder="Introduzca su nueva contraseña otra vez" required>            
+                <input type="password" name="newPasswd2" placeholder="Introduzca su nueva contraseña otra vez">
 
                 <h2>Nueva imagen de perfil</h2>
                 <input class="img" name="image" type="file" accept="image/*" placeholder="Introduzca su imagen de usuario">

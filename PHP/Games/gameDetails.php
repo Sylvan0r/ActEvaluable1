@@ -66,7 +66,9 @@
         </div>
 
         <div class="game-actions">
+            <?php if(isset($_SESSION["gmail"])):?>
             <button onclick="darLike(<?php echo $id; ?>)">Like</button>
+            <?php endif;?>
 
             <div class="like-bar">
                 <?php
@@ -82,7 +84,9 @@
                 }
                 ?>
             </div>
+            <?php if(isset($_SESSION["gmail"])):?>
             <button onclick="darDislike(<?php echo $id; ?>)">Dislike</button>
+            <?php endif;?>
         </div>
 
         <p class="game-views">Visualizaciones totales: <?php echo $views; ?></p>
@@ -111,7 +115,7 @@
             .then(response => response.text())
             .then(data => {
                 alert(data);
-                actualizarVotos(id);
+                location.reload();
             });
         }
 
@@ -124,26 +128,7 @@
             .then(response => response.text())
             .then(data => {
                 alert(data);
-                actualizarVotos(id);
-            });
-        }
-
-        function actualizarVotos(id) {
-            fetch("getVotes.php?id=" + id)
-            .then(response => response.json())
-            .then(data => {
-                const likeBar = document.querySelector('.like-bar');
-                const totalVotos = data.likes + data.dislikes;
-                if (totalVotos === 0) {
-                    likeBar.innerHTML = '<p>Este juego aún no tiene votos.</p><progress value="0" max="100"></progress>';
-                } else {
-                    const porcentajeLikes = Math.round((data.likes / totalVotos) * 100);
-                    likeBar.innerHTML = `
-                        <p>Le gusta al ${porcentajeLikes}% de los usuarios (${data.likes}/${totalVotos})</p>
-                        <p>Total de personas que han votado: ${data.numPersonas}</p>
-                        <progress value="${porcentajeLikes}" max="100"></progress>
-                    `;
-                }
+                location.reload();
             });
         }
     </script>
