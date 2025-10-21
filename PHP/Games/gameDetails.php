@@ -14,13 +14,11 @@
 
     $id = intval($_GET['id']);
 
-    // Actualizar visualizaciones
     $upd = $conn->prepare("UPDATE games SET views = views + 1 WHERE ID = ?");
     $upd->bind_param("i", $id);
     $upd->execute();
     $upd->close();
 
-    // Obtener detalles del juego
     $stmt = $conn->prepare("SELECT Título, Descripción, Año, Caratula, Compañia, userID, views FROM games WHERE ID = ?");
     $stmt->bind_param("i", $id);
     $stmt->execute();
@@ -35,7 +33,6 @@
     $titulo = $row['Título'];
     $views = (int)$row['views'];
 
-    // Obtener total de likes y dislikes del juego
     $stmtLikes = $conn->prepare("SELECT COALESCE(SUM(likes),0) AS totalLikes,COALESCE(SUM(dislikes),0) AS totalDislikes,COUNT(DISTINCT userName) AS totalUsuarios FROM gamesLikes WHERE nombreJuego = ?");
     $stmtLikes->bind_param("s", $titulo);
     $stmtLikes->execute();
@@ -79,7 +76,7 @@
                     echo '<progress value="0" max="100"></progress>';
                 } else {
                     $porcentajeLikes = round(($likes / $totalVotos) * 100);
-                    echo '<p>Le gusta al ' . $porcentajeLikes . '% de los usuarios (' . $likes . '/' . $totalVotos . ')</p>';
+                    echo '<p>Le gusta al ' . $porcentajeLikes . '% de los usuarios</p><br>';
                     echo '<p>Total de personas que han votado: ' . $numPersonas . '</p>';
                     echo '<progress value="' . $porcentajeLikes . '" max="100"></progress>';
                 }
@@ -91,7 +88,6 @@
         <p class="game-views">Visualizaciones totales: <?php echo $views; ?></p>
 
         <?php
-            // Mostrar opciones de edición solo al creador
             if (isset($_SESSION["gmail"]) && $row['userID'] === $_SESSION["gmail"]) {
                 echo '<div class="game-actions">';
                 echo '<a href="editGame.php?id=' . urlencode($id) . '" class="btn edit">Editar</a>';
@@ -115,7 +111,7 @@
             .then(response => response.text())
             .then(data => {
                 alert(data);
-                location.reload();
+                actualizarVotos(id);
             });
         }
 
@@ -128,7 +124,26 @@
             .then(response => response.text())
             .then(data => {
                 alert(data);
-                location.reload();
+                actualizarVotos(id);
+            });
+        }
+
+        function actualizarVotos(id) {
+            fetch("getVotes.php?id=" + id)
+            .then(response => response.json())
+            .then(data => {
+                const likeBar = document.querySelector('.like-bar');
+                const totalVotos = data.likes + data.dislikes;
+                if (totalVotos === 0) {
+                    likeBar.innerHTML = '<p>Este juego aún no tiene votos.</p><progress value="0" max="100"></progress>';
+                } else {
+                    const porcentajeLikes = Math.round((data.likes / totalVotos) * 100);
+                    likeBar.innerHTML = `
+                        <p>Le gusta al ${porcentajeLikes}% de los usuarios (${data.likes}/${totalVotos})</p>
+                        <p>Total de personas que han votado: ${data.numPersonas}</p>
+                        <progress value="${porcentajeLikes}" max="100"></progress>
+                    `;
+                }
             });
         }
     </script>
