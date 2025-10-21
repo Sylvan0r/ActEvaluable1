@@ -51,7 +51,8 @@
                 $porcentajeLikes = $totalVotos > 0 ? round(($likes / $totalVotos) * 100) : 0;
 
                 echo '<div class="stat-card">';
-                echo '<h2>' . htmlspecialchars($row['Título']) . ' (' . htmlspecialchars($row['Año']) . ')</h2>';
+                echo '<h2>' . htmlspecialchars($row['Título']) . ')</h2>';
+                echo '<h2>Año: ' . htmlspecialchars($row['Año']) . '</h2>';
                 echo '<div class="game-image">';
                 echo '<img src="data:image/jpg;base64,' . $caratulaBase64 . '" alt="Carátula del juego">';
                 echo '</div>';

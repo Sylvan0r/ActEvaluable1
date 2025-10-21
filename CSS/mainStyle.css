@@ -208,6 +208,7 @@ textarea {
     width: 100%;
     margin-bottom: auto;
     margin-top: 40px;
+    gap: 20px;
 }
 
 .game-card {
@@ -305,7 +306,7 @@ textarea {
     margin-top: 120px;
     background: rgba(255, 255, 255, 0.05);
     padding: 40px;
-    border: 1px white solid;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     max-width: 500px;
     border-radius: 50px;
     width: 90%;

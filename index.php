@@ -1,18 +1,15 @@
 <?php
     session_start();
-    include "PHP/connection.php"; // ajusta la ruta según tu estructura
+    include "PHP/connection.php"; 
 
-    // Si no hay sesión activa, pero sí hay cookie de "recordar sesión"
     if (!isset($_SESSION["user"]) && isset($_COOKIE["remember_token"])) {
         $token = $_COOKIE["remember_token"];
 
-        // Buscar el usuario que tenga ese token
         $stmt = $conn->prepare("SELECT Nombre, Gmail FROM users WHERE remember_token = ?");
         $stmt->bind_param("s", $token);
         $stmt->execute();
         $result = $stmt->get_result();
 
-        // Si existe un usuario con ese token, reestablecemos su sesión
         if ($result->num_rows === 1) {
             $user = $result->fetch_assoc();
 
@@ -20,7 +17,6 @@
             $_SESSION["gmail"] = $user["Gmail"];
             $_SESSION["exito"] = "Sesión restaurada automáticamente.";
 
-            // Opcional: renovar la cookie por 7 días más
             setcookie("remember_token", $token, time() + (86400 * 7), "/", "", true, true);
         }
     }
